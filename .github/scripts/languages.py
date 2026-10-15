@@ -82,8 +82,6 @@ def list_repos(token):
 def language_of(path):
     if " => " in path:  # renombrado: "dir/{a => b}.js" o "a.js => b.js"
         path = path.replace("{", "").replace("}", "").split(" => ")[-1]
-    if path.startswith(SKIP_DIRS) or any(f"/{d}" in path for d in SKIP_DIRS) or path.endswith(SKIP_SUFFIXES) or any(p in path for p in SKIP_PARTS):
-        return None
     name = path.rsplit("/", 1)[-1].lower()
     if name.startswith("dockerfile"):
         return "Dockerfile"
@@ -93,19 +91,28 @@ def language_of(path):
     return LANGUAGES.get(ext)
 
 
-def analyze(token, repo, workdir, seen, stats):
+def skipped(path):
+    path = path.replace("{", "").replace("}", "").split(" => ")[-1]
+    return path.startswith(SKIP_DIRS) or any(f"/{d}" in path for d in SKIP_DIRS) or path.endswith(SKIP_SUFFIXES) or any(p in path for p in SKIP_PARTS)
+
+
+def git_log(path, *args):
+    cmd = ["git", "-C", path, "log", "--all", "--no-merges", "-M", "--format=@%H", *[f"--author={a}" for a in AUTHORS], *args]
+    return subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+
+
+def analyze(token, repo, workdir, seen, stats, tech):
     path = os.path.join(workdir, repo.replace("/", "__"))
     url = f"https://x-access-token:{token}@github.com/{repo}.git"
     clone = subprocess.run(["git", "clone", "--bare", "--quiet", url, path], capture_output=True, text=True)
     if clone.returncode:
         print(f"  ! no se pudo clonar {repo}")
         return 0
-    cmd = ["git", "-C", path, "log", "--all", "--no-merges", "-M", "--numstat", "--format=@%H"]
-    cmd += [f"--author={a}" for a in AUTHORS]
-    out = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+    out = git_log(path, "--numstat")
+    patch = git_log(path, "-p", "--", *PATCH_PATHS)
     shutil.rmtree(path, ignore_errors=True)
 
-    commits, current, local = 0, None, {}
+    new, current, local = set(), None, {}
     for line in out.splitlines():
         if line.startswith("@"):
             current = line[1:]
@@ -113,21 +120,25 @@ def analyze(token, repo, workdir, seen, stats):
                 current = None
             else:
                 seen.add(current)
-                commits += 1
+                new.add(current)
             continue
         if not current or not line.strip():
             continue
         added, _, file = line.split("\t", 2)
+        if skipped(file):
+            continue
+        tech.add_path(repo, file.replace("{", "").replace("}", "").split(" => ")[-1])
         if added == "-" or int(added) > MAX_LINES_PER_FILE:
             continue
         lang = language_of(file)
         if lang:
             stats[lang] = stats.get(lang, 0) + int(added)
             local[lang] = local.get(lang, 0) + int(added)
-    if commits:
+    tech.scan_patch(repo, patch, new, skipped)
+    if new:
         top = ", ".join(f"{k} {v:,}" for k, v in sorted(local.items(), key=lambda kv: -kv[1])[:3])
-        print(f"  {repo}: {commits} commits ({top or 'sin código'})")
-    return commits
+        print(f"  {repo}: {len(new)} commits ({top or 'sin código'})")
+    return len(new)
 
 
 def render(stats, commits, repos, limit=10):
@@ -177,21 +188,28 @@ def main():
     repos = [r for r in dict.fromkeys(repos) if r not in SKIP_REPOS]
     print(f"Analizando {len(repos)} repos")
 
-    seen, stats, active = set(), {}, 0
+    seen, stats, active, tech = set(), {}, 0, Tech()
     with tempfile.TemporaryDirectory() as workdir:
         for repo in repos:
-            n = analyze(token, repo, workdir, seen, stats)
+            n = analyze(token, repo, workdir, seen, stats, tech)
             if n:
                 active += 1
 
     if not stats:
-        sys.exit("No se encontraron commits; no se sobrescribe la tarjeta")
-    output = os.environ.get("OUTPUT", "metrics/languages.svg")
-    os.makedirs(os.path.dirname(output), exist_ok=True)
-    with open(output, "w", encoding="utf-8") as f:
+        sys.exit("No se encontraron commits; no se sobrescriben las tarjetas")
+    outdir = os.environ.get("OUTDIR", "metrics")
+    os.makedirs(outdir, exist_ok=True)
+    with open(os.path.join(outdir, "languages.svg"), "w", encoding="utf-8") as f:
         f.write(render(stats, len(seen), active))
+    with open(os.path.join(outdir, "tech.svg"), "w", encoding="utf-8") as f:
+        f.write(render_tech(tech))
+    with open(os.path.join(outdir, "commits.json"), "w", encoding="utf-8") as f:
+        json.dump({"commits": len(seen), "repos": active, "lines": sum(stats.values())}, f)
+
     for name, lines in sorted(stats.items(), key=lambda kv: -kv[1]):
         print(f"  {name}: {lines:,}")
+    print("Herramientas:", ", ".join(f"{n} ({len(f)})" for n, f in sorted(tech.tools.items(), key=lambda kv: -len(kv[1]))))
+    print("Comandos:", ", ".join(f"{c} ({n})" for c, n in tech.commands.most_common(40)))
 
 
 if __name__ == "__main__":
