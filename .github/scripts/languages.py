@@ -31,6 +31,8 @@ MAX_LINES_PER_FILE = 3000
 
 SKIP_DIRS = ("node_modules/", "vendor/", "dist/", "build/", ".next/", "Pods/", "target/", ".gradle/", "android/app/build/")
 SKIP_SUFFIXES = (".min.js", ".min.css", ".bundle.js", ".map", "-lock.json", ".lock", ".lockb")
+# Proyectos de terceros descargados dentro de un repo (zips de GitHub, toolchains, dependencias).
+SKIP_PARTS = ("-master/", "-main/", "third_party/", "third-party/", "go_toolchain/", "go_gopath/", "pkg/mod/", "site-packages/")
 
 LANGUAGES = {
     ".java": "Java", ".kt": "Kotlin", ".kts": "Kotlin", ".groovy": "Groovy", ".gradle": "Groovy",
@@ -80,7 +82,7 @@ def list_repos(token):
 def language_of(path):
     if " => " in path:  # renombrado: "dir/{a => b}.js" o "a.js => b.js"
         path = path.replace("{", "").replace("}", "").split(" => ")[-1]
-    if path.startswith(SKIP_DIRS) or any(f"/{d}" in path for d in SKIP_DIRS) or path.endswith(SKIP_SUFFIXES):
+    if path.startswith(SKIP_DIRS) or any(f"/{d}" in path for d in SKIP_DIRS) or path.endswith(SKIP_SUFFIXES) or any(p in path for p in SKIP_PARTS):
         return None
     name = path.rsplit("/", 1)[-1].lower()
     if name.startswith("dockerfile"):
@@ -103,7 +105,7 @@ def analyze(token, repo, workdir, seen, stats):
     out = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
     shutil.rmtree(path, ignore_errors=True)
 
-    commits, current = 0, None
+    commits, current, local = 0, None, {}
     for line in out.splitlines():
         if line.startswith("@"):
             current = line[1:]
@@ -121,6 +123,10 @@ def analyze(token, repo, workdir, seen, stats):
         lang = language_of(file)
         if lang:
             stats[lang] = stats.get(lang, 0) + int(added)
+            local[lang] = local.get(lang, 0) + int(added)
+    if commits:
+        top = ", ".join(f"{k} {v:,}" for k, v in sorted(local.items(), key=lambda kv: -kv[1])[:3])
+        print(f"  {repo}: {commits} commits ({top or 'sin código'})")
     return commits
 
 
@@ -177,7 +183,6 @@ def main():
             n = analyze(token, repo, workdir, seen, stats)
             if n:
                 active += 1
-                print(f"  {repo}: {n} commits")
 
     if not stats:
         sys.exit("No se encontraron commits; no se sobrescribe la tarjeta")
