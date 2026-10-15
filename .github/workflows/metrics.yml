@@ -31,7 +31,7 @@ jobs:
             servisofts/servisofts-table, servisofts/inventario, servisofts/caja,
             servisofts/contabilidad, servisofts/compra_venta, servisofts/facturacion,
             Apex-Technology-Corporation/extensions, Core-Technology-Corporation/vscode,
-            CalisteniaBolivia-SRL/server, S-ERP/server
+            CalisteniaBolivia-SRL/server, S-ERP/server, S-ERP/app@three
           plugin_languages_analysis_timeout: 20
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
