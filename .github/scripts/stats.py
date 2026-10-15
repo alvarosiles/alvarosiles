@@ -152,7 +152,7 @@ def render_stats(s, width=495, height=250):
         ("Contribuciones totales", s["contributions"]),
         ("Commits (gráfico de GitHub)", s["commits"]),
         ("Commits en todas las ramas", s.get("all_commits", 0)),
-        ("Líneas de código añadidas", s.get("lines", 0)),
+        ("Líneas añadidas", s.get("lines", 0)),
         ("Pull requests", s["prs"]),
         ("Issues", s["issues"]),
         ("Repos en los que contribuí", s["contributed"]),
