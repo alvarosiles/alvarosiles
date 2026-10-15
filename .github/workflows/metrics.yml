@@ -22,6 +22,11 @@ jobs:
           config_timezone: America/La_Paz
           repositories_affiliations: owner, collaborator, organization_member
           repositories_forks: no
+          commits_authoring: >-
+            alvarosiles, alvarosiles11, Alvaro Siles Estrada,
+            alvarosiles.developer@gmail.com, alvarosiles1@gmail.com,
+            242724234+alvarosiles@users.noreply.github.com,
+            61075383+alvarosiles11@users.noreply.github.com
           plugin_languages: yes
           plugin_languages_limit: 8
           plugin_languages_details: bytes-size, percentage
@@ -31,7 +36,7 @@ jobs:
             servisofts/servisofts-table, servisofts/inventario, servisofts/caja,
             servisofts/contabilidad, servisofts/compra_venta, servisofts/facturacion,
             Apex-Technology-Corporation/extensions, Core-Technology-Corporation/vscode,
-            CalisteniaBolivia-SRL/server, S-ERP/server, S-ERP/app@three
+            CalisteniaBolivia-SRL/server, S-ERP/server, alvarosiles/S-ERP-app_backup
           plugin_languages_analysis_timeout: 20
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
