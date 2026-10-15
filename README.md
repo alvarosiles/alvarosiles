@@ -1,4 +1,4 @@
-# 👋 Alvaro Siles — Software Engineer
+# 👋 Alvaro Siles — Ingeniero de Software
 
 <p align="center">
 <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/alvarosiles/alvarosiles?style=social"> <img alt="GitHub followers" src="https://img.shields.io/github/followers/alvarosiles?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/alvarosiles/alvarosiles?style=social">
@@ -22,46 +22,46 @@
 </p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/🟢_OPEN_TO_WORK-success?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/🟢_DISPONIBLE-success?style=for-the-badge"/>
 </p>
 
-🇪🇸 Leer en [Español](README.es.md)
+🇬🇧 Read in [English](README.md)
 
 ---
 
-**Full Stack Software Engineer** with 4 years of professional experience, **currently available for new opportunities**.
-Mobile developer (Android/Java, React Native) and full-stack developer (ASP.NET, PHP, Laravel, Java, React, Angular, jQuery). Previously at Servisofts SRL.
+**Ingeniero de Software Full Stack** con 4 años de experiencia profesional, **disponible actualmente para nuevas oportunidades**.
+Desarrollador móvil (Android/Java, React Native) y full-stack (ASP.NET, PHP, Laravel, Java, React, Angular, jQuery). Anteriormente en Servisofts SRL.
 
-> 📩 **Looking for my next role — let's talk!** Reach out via [email](mailto:alvarosiles1@gmail.com) or [WhatsApp](https://api.whatsapp.com/send?phone=59169050028&text=Hola,%20Alvaro%20vi%20tu%20repositorio%20GitHub%20y%20quiero%20conversar%20sobre%20una%20oportunidad).
+> 📩 **¡Busco mi próximo desafío profesional, hablemos!** Escríbeme por [correo](mailto:alvarosiles1@gmail.com) o [WhatsApp](https://api.whatsapp.com/send?phone=59169050028&text=Hola,%20Alvaro%20vi%20tu%20repositorio%20GitHub%20y%20quiero%20conversar%20sobre%20una%20oportunidad).
 
-🎓 B.Sc. in Systems Engineering — Universidad NUR
-🥇 Postgraduate in Microservices Architecture — Universidad NUR
-🖥️ Technology & innovation enthusiast
+🎓 Lic. en Ingeniería de Sistemas — Universidad NUR
+🥇 Postgrado en Arquitectura con Microservicios — Universidad NUR
+🖥️ Entusiasta de la tecnología y la innovación
 
-### Skills
+### Habilidades
 
-| Frontend | Backend / DB | DevOps & Cloud | Practices |
+| Frontend | Backend / BD | DevOps & Cloud | Prácticas |
 | --- | --- | --- | --- |
-| React, React Native, Angular, jQuery, HTML/CSS | Java, C#, PHP/Laravel, ASP.NET, PostgreSQL, SQL | Docker, Nginx, GCP, Azure, AWS, DigitalOcean, Heroku, Railway | REST APIs, SPA, OOP, UML, Scrum, Git/GitHub/GitLab |
+| React, React Native, Angular, jQuery, HTML/CSS | Java, C#, PHP/Laravel, ASP.NET, PostgreSQL, SQL | Docker, Nginx, GCP, Azure, AWS, DigitalOcean, Heroku, Railway | REST APIs, SPA, POO, UML, Scrum, Git/GitHub/GitLab |
 
-**Languages:** JavaScript & C# & Java (4 yrs), Python (1 yr)
-**English level:** B1 (Intermediate) — Writing, Listening, Speaking, Reading
+**Lenguajes:** JavaScript, C# y Java (4 años), Python (1 año)
+**Nivel de inglés:** B1 (Intermedio) — Escritura, Escucha, Habla, Lectura
 
-### Experience
+### Experiencia
 
-- **Backend:** DB setup & maintenance, REST API design/testing (Postman), server library management, Linux (Ubuntu) cloud server deployment.
-- **Frontend:** UX/UI prototyping (Figma), web accessibility & SEO, REST API consumption, hybrid apps with React Native, unit/E2E testing.
-- **Systems Admin:** network troubleshooting, backups and data recovery.
-- **Team work:** 5-person Scrum team (1 scrum master, 2 backend, 2 frontend) — frontend role, from Figma prototypes to implementation.
+- **Backend:** configuración y mantenimiento de BD, diseño/pruebas de APIs REST (Postman), gestión de librerías de servidor, despliegue en servidores Linux (Ubuntu).
+- **Frontend:** prototipado UX/UI (Figma), accesibilidad web y SEO, consumo de APIs REST, apps híbridas con React Native, pruebas unitarias y E2E.
+- **Administración de sistemas:** solución de problemas de red, respaldo y recuperación de datos.
+- **Trabajo en equipo:** equipo Scrum de 5 personas (1 scrum master, 2 backend, 2 frontend) — rol frontend, desde prototipos en Figma hasta implementación.
 
-### Events & Tools
+### Eventos y Herramientas
 
 🏆 GDG DevFest · Google Code Jam · Google I/O
 🛠️ Asana, Jira, Trello, Draw.io
 
-### 🤝🏻 Connect with Me
+### 🤝🏻 Contáctame
 
 - 📧 [alvarosiles1@gmail.com](mailto:alvarosiles1@gmail.com)
 - 📱 [+591 69050028 (WhatsApp)](https://api.whatsapp.com/send?phone=59169050028&text=Hola,%20Alvaro%20vi%20repositorio%20GitHub%20y%20quiero%20preguntarle…)
-- 🌐 Portfolio: [www.alvarosiles.com](https://alvarosiles.com)
+- 🌐 Portafolio: [www.alvarosiles.com](https://alvarosiles.com)
 - 📍 Santa Cruz de la Sierra, Bolivia
