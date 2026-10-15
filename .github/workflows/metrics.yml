@@ -1,0 +1,43 @@
+name: Metrics
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Lenguajes (repos públicos, privados y de organizaciones)
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/languages.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: alvarosiles
+          base: ""
+          config_timezone: America/La_Paz
+          repositories_affiliations: owner, collaborator, organization_member
+          repositories_forks: no
+          plugin_languages: yes
+          plugin_languages_limit: 12
+          plugin_languages_threshold: 0%
+          plugin_languages_other: yes
+          plugin_languages_colors: github
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_sections: most-used
+
+      - name: Resumen general
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics/general.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: alvarosiles
+          base: header, activity, community, repositories, metadata
+          config_timezone: America/La_Paz
+          repositories_affiliations: owner, collaborator, organization_member
+          repositories_forks: no
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
