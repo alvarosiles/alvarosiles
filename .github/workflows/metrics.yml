@@ -8,6 +8,7 @@ on:
 jobs:
   metrics:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
     steps:
@@ -25,5 +26,7 @@ jobs:
           plugin_languages_limit: 8
           plugin_languages_details: bytes-size, percentage
           plugin_languages_sections: most-used
+          plugin_languages_indepth: yes
+          plugin_languages_analysis_timeout: 20
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
