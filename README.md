@@ -25,7 +25,7 @@
 <img src="https://img.shields.io/badge/🟢_DISPONIBLE-success?style=for-the-badge"/>
 </p>
 
-🇬🇧 Read in [English](README.md)
+🇬🇧 Read in [English](README.en.md)
 
 ---
 
