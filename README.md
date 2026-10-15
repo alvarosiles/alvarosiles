@@ -10,7 +10,8 @@
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=alvarosiles&theme=github-dark-blue&hide_border=true" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=alvarosiles&locale=es&theme=github-dark-blue&hide_border=true" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=alvarosiles&mode=weekly&locale=es&theme=github-dark-blue&hide_border=true" />
 </p>
 
 <p align="center">
