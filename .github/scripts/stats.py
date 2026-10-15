@@ -1,7 +1,8 @@
 """Genera metrics/stats.svg y metrics/streak.svg con datos de la API de GitHub.
 
 Usa el token del usuario, así que incluye contribuciones privadas y de
-organizaciones. Sin dependencias externas.
+organizaciones. Si existe OUTDIR/commits.json (de languages.py) añade los
+commits y líneas de todas las ramas. Sin dependencias externas.
 
 Variables de entorno:
   GH_TOKEN  token con permisos repo y read:org (obligatorio)
@@ -149,12 +150,12 @@ def streaks(days, today):
 def render_stats(s, width=495, height=250):
     rows = [
         ("Contribuciones totales", s["contributions"]),
-        ("Commits", s["commits"]),
+        ("Commits (gráfico de GitHub)", s["commits"]),
+        ("Commits en todas las ramas", s.get("all_commits", 0)),
+        ("Líneas de código añadidas", s.get("lines", 0)),
         ("Pull requests", s["prs"]),
         ("Issues", s["issues"]),
-        ("Revisiones de PR", s["reviews"]),
         ("Repos en los que contribuí", s["contributed"]),
-        ("Repositorios propios", s["repos"]),
         ("Organizaciones", s["orgs"]),
     ]
     items = []
@@ -213,6 +214,12 @@ def main():
     outdir = os.environ.get("OUTDIR", "metrics")
 
     s = collect(token, login)
+    try:  # totales de todas las ramas, generados antes por languages.py
+        with open(os.path.join(outdir, "commits.json"), encoding="utf-8") as f:
+            data = json.load(f)
+        s["all_commits"], s["lines"] = data["commits"], data["lines"]
+    except (OSError, ValueError, KeyError):
+        pass
     daily, weekly = streaks(s["days"], dt.date.today())
     os.makedirs(outdir, exist_ok=True)
     with open(os.path.join(outdir, "stats.svg"), "w", encoding="utf-8") as f:

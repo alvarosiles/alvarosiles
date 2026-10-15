@@ -1,13 +1,17 @@
-"""Genera metrics/languages.svg con los lenguajes de TODOS mis commits.
+"""Genera las tarjetas de lenguajes y tecnologías a partir de TODOS mis commits.
 
 Recorre todos los repos accesibles con el token (propios, de colaborador y de
 organizaciones) y todas sus ramas, cuenta solo los commits de mis identidades
-y suma las líneas añadidas por lenguaje. Sin dependencias externas.
+y genera en OUTDIR:
+  languages.svg  líneas añadidas por lenguaje
+  tech.svg       herramientas y comandos de terminal (ver tech.py)
+  commits.json   totales que usa stats.py
+Sin dependencias externas.
 
 Variables de entorno:
   GH_TOKEN  token con permisos repo y read:org (obligatorio)
   REPOS     lista opcional "owner/repo,owner/repo" para probar con pocos repos
-  OUTPUT    ruta del SVG (por defecto metrics/languages.svg)
+  OUTDIR    carpeta de salida (por defecto metrics)
 """
 
 import json
@@ -18,6 +22,9 @@ import sys
 import tempfile
 import urllib.request
 from html import escape
+
+from tech import PATCH_PATHS, Tech
+from tech import render as render_tech
 
 AUTHORS = ["alvarosiles", "Alvaro Siles"]
 EXTRA_REPOS = ["S-ERP/app"]

@@ -14,6 +14,10 @@
 </p>
 
 <p align="center">
+  <img width="99%" src="metrics/tech.svg" />
+</p>
+
+<p align="center">
   <img width="99%" src="metrics/streak.svg" />
 </p>
 
