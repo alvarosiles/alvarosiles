@@ -7,10 +7,6 @@
 <h2 align="center">🧩 Todos mis lenguajes y actividad</h2>
 
 <p align="center">
-  <img src="metrics/languages.svg" />
-</p>
-
-<p align="center">
   <img src="metrics/general.svg" />
 </p>
 
