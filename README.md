@@ -18,5 +18,5 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/alvarosiles/alvarosiles/blob/main/estadisticas.md">📊 Ver todas las estadísticas</a>
+  <a href="https://github.com/alvarosiles/alvarosiles/blob/main/estadisticas.md"><img height="44" src="boton-metricas.svg" alt="Ver todas las métricas" /></a>
 </p>
