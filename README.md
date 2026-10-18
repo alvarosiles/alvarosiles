@@ -16,5 +16,5 @@
 
 <p>
   <a href="https://github.com/alvarosiles/alvarosiles/blob/main/estadisticas.md"><img align="right" height="44" src="assets/btn-metrics-es.svg" alt="Ver todas las métricas" /></a>
-  <a href="https://alvarosiles.cloud"><img height="44" src="assets/btn-portfolio-es.svg" alt="Portafolio web" /></a>
+  <a href="http://personal.alvarosiles.cloud/"><img height="44" src="assets/btn-personal-es.svg" alt="Web personal" /></a>
 </p>
