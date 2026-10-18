@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="250" viewBox="0 0 495 250" role="img" aria-label="GitHub stats">
+  <style>
+    .title { font: 600 18px 'Segoe UI', Ubuntu, sans-serif; fill: #58a6ff; }
+    .sub { font: 400 12px 'Segoe UI', Ubuntu, sans-serif; fill: #8b949e; }
+    .label { font: 400 13px 'Segoe UI', Ubuntu, sans-serif; fill: #c9d1d9; }
+    .value { font: 700 13px 'Segoe UI', Ubuntu, sans-serif; fill: #c9d1d9; }
+    .big { font: 700 30px 'Segoe UI', Ubuntu, sans-serif; fill: #c9d1d9; }
+    .accent { fill: #f78166; }
+    .caption { font: 600 13px 'Segoe UI', Ubuntu, sans-serif; fill: #c9d1d9; }
+    .date { font: 400 11px 'Segoe UI', Ubuntu, sans-serif; fill: #8b949e; }
+</style>
+  <rect width="495" height="250" rx="4.5" fill="#0d1117"/>
+  <text x="25" y="36" class="title">GitHub stats</text>
+  <text x="25" y="58" class="sub">Includes private and organization contributions · since 8 Nov 2025</text>
+  <text x="25" y="100" class="label">Total contributions</text><text x="230" y="100" class="value" text-anchor="end">520</text><text x="255" y="100" class="label">Commits (GitHub graph)</text><text x="460" y="100" class="value" text-anchor="end">276</text><text x="25" y="134" class="label">Commits across all branches</text><text x="230" y="134" class="value" text-anchor="end">3,634</text><text x="255" y="134" class="label">Lines added</text><text x="460" y="134" class="value" text-anchor="end">764,186</text><text x="25" y="168" class="label">Pull requests</text><text x="230" y="168" class="value" text-anchor="end">13</text><text x="255" y="168" class="label">Issues</text><text x="460" y="168" class="value" text-anchor="end">206</text><text x="25" y="202" class="label">Repos contributed to</text><text x="230" y="202" class="value" text-anchor="end">72</text><text x="255" y="202" class="label">Organizations</text><text x="460" y="202" class="value" text-anchor="end">5</text>
+</svg>

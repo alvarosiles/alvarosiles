@@ -75,7 +75,7 @@
     <rect x="84.5" width="84.0" height="20" rx="3" fill="#1f6feb"/>
     <rect x="84.5" width="4" height="20" fill="#1f6feb"/>
     <text x="42.2" y="14" text-anchor="middle">last commit</text>
-    <text x="126.5" y="14" text-anchor="middle">18 oct 2026</text>
+    <text x="126.5" y="14" text-anchor="middle">18 Oct 2026</text>
   </g>
   <g transform="translate(526.2,28)">
     <rect width="93.0" height="20" rx="3" fill="#30363d"/>
