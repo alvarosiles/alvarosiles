@@ -20,6 +20,10 @@
 </p>
 
 <p align="center">
+  <img width="99%" src="metrics/badges.svg" />
+</p>
+
+<p align="center">
   <img width="49%" src="metrics/languages.svg" />
   <img width="49%" src="metrics/stats.svg" />
 </p>
