@@ -46,7 +46,8 @@ jobs:
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
           extras_css: |
-            .items-wrapper { background: #0d1117; border-radius: 4.5px; padding: 6px 0 4px; }
+            svg.large { background: #0d1117; border-radius: 4.5px; }
+            .items-wrapper { padding: 6px 0 4px; }
             svg { color: #c9d1d9; }
             h1, h2, h3 { color: #58a6ff; }
             .field svg { fill: #8b949e; }

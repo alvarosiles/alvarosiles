@@ -24,3 +24,17 @@
 <p align="center">
   <img width="99%" src="metrics/general.svg" />
 </p>
+
+
+![](https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS)
+
+![](https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&base=7000)
+
+![](https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&base=20000&abbreviated=true)
+
+![](https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&base=20000&abbreviated=true&color=green)
+![](https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&base=20000&abbreviated=true&color=dc143c)
+
+ https://ba3369b6-f588-49f1-9120-a0a5dde98e4a-00-2b1358za4q9z4.janeway.replit.dev/
+ 
+<img src="https://profile-counter.glitch.me/alvarosiles11/count.svg" />

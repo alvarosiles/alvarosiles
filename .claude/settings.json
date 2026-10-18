@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Read(//c/Users/ALVARO/.claude/projects/c--Users-ALVARO-Documents-GitHub-alvarosiles/memory/**)",
-      "Bash(echo \"- [Responder en español]\\(responder-en-espanol.md\\) — el usuario quiere respuestas en español sencillo\")"
+      "Bash(echo \"- [Responder en español]\\(responder-en-espanol.md\\) — el usuario quiere respuestas en español sencillo\")",
+      "Bash(git remote *)",
+      "Bash(gh run *)"
     ]
   }
 }
