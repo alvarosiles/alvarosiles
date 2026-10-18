@@ -22,7 +22,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Lenguajes, herramientas y comandos (todos los repos y ramas)
         run: python3 .github/scripts/languages.py
@@ -38,7 +38,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add metrics/*.svg
-          git diff --cached --quiet || { git commit -m "Update metrics cards - [Skip GitHub Action]" && git push; }
+          git diff --cached --quiet && exit 0
+          git commit -m "Update metrics cards - [Skip GitHub Action]"
+          # Si alguien subió cambios mientras corría la acción, se integran antes de subir
+          git pull --rebase
+          git push
 
       - name: Actividad general (repos públicos, privados y de organizaciones)
         uses: lowlighter/metrics@v3.34
