@@ -1,11 +1,11 @@
- 
-
+<p align="center">
+  <img height="20" src="https://visitor-badge.laobi.icu/badge?page_id=alvarosiles.alvarosiles&left_text=visitas&left_color=%23555&right_color=%231f6feb" />
+</p>
 
 [![Vista previa del portafolio](og-animated.gif)](https://alvarosiles.cloud)
 
-
 <p align="center">
-  <img height="20" src="https://visitor-badge.laobi.icu/badge?page_id=alvarosiles.alvarosiles&left_text=visitas&left_color=%23555&right_color=%231f6feb" />
+  <a href="https://github.com/alvarosiles/alvarosiles/blob/main/README.en.md"><img height="34" src="boton-english.svg" alt="English" /></a>
 </p>
 
 <p align="center">

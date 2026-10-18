@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="106" height="34" viewBox="0 0 106 34">
+  <style>
+    .t { font: 600 13px 'Segoe UI', Ubuntu, sans-serif; fill: #58a6ff; }
+  </style>
+  <rect x="0.5" y="0.5" width="105" height="33" rx="7" fill="#0d1117" stroke="#30363d"/>
+  <g transform="translate(14,9)" fill="none" stroke="#58a6ff" stroke-width="1.4">
+    <circle cx="8" cy="8" r="7.3"/>
+    <path d="M0.7 8h14.6M8 0.7c2.2 2 3.2 4.5 3.2 7.3S10.2 13.3 8 15.3M8 0.7C5.8 2.7 4.8 5.2 4.8 8s1 5.3 3.2 7.3"/>
+  </g>
+  <text class="t" x="38" y="22">Español</text>
+</svg>

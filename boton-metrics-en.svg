@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="230" height="44" viewBox="0 0 230 44">
+  <style>
+    .t { font: 600 14px 'Segoe UI', Ubuntu, sans-serif; fill: #58a6ff; }
+  </style>
+  <rect x="0.5" y="0.5" width="229" height="43" rx="8" fill="#0d1117" stroke="#30363d"/>
+  <g transform="translate(26,13)" fill="none" stroke="#58a6ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1 17h16"/>
+    <path d="M3 17V9M8 17V3M13 17V11"/>
+  </g>
+  <text class="t" x="58" y="27">View all metrics</text>
+  <g transform="translate(188,15)" fill="none" stroke="#58a6ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 7h14M8 1l6 6-6 6"/>
+  </g>
+</svg>
