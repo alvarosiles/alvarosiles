@@ -1,8 +1,8 @@
-<h1 align="center">👋 Alvaro Siles — Ingeniero de Software</h1>
+ 
 
-<p align="center">
-  Full Stack Developer · Ingeniero de Sistemas · Web & Mobile · Cloud · DevOps · IT Infrastructure
-</p>
+
+[![Vista previa del portafolio](og-animated.gif)](https://alvarosiles.cloud)
+
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&color=0e75b6&style=flat" />
