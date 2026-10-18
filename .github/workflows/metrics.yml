@@ -1,9 +1,19 @@
+# Actualiza las tarjetas de metrics/ una vez al día (06:00 en Bolivia).
+# Los scripts de .github/scripts generan cada tarjeta en español e inglés;
+# lowlighter/metrics genera metrics/general.svg (actividad y calendario).
 name: Metrics
 
 on:
   schedule:
     - cron: "0 10 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: metrics
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
 
 jobs:
   metrics:
@@ -14,30 +24,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Lenguajes, herramientas y comandos de todos mis commits (todos los repos y ramas)
+      - name: Lenguajes, herramientas y comandos (todos los repos y ramas)
         run: python3 .github/scripts/languages.py
-        env:
-          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
 
       - name: Estadísticas y rachas
         run: python3 .github/scripts/stats.py
-        env:
-          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
 
       - name: Badges
         run: python3 .github/scripts/badges.py
-        env:
-          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
 
       - name: Guardar tarjetas
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add metrics/languages.svg metrics/tech.svg metrics/stats.svg metrics/streak.svg metrics/badges.svg
+          git add metrics/*.svg
           git diff --cached --quiet || { git commit -m "Update metrics cards - [Skip GitHub Action]" && git push; }
 
-      - name: Resumen general (repos públicos, privados y de organizaciones)
-        uses: lowlighter/metrics@latest
+      - name: Actividad general (repos públicos, privados y de organizaciones)
+        uses: lowlighter/metrics@v3.34
         with:
           filename: metrics/general.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -50,6 +54,7 @@ jobs:
           repositories_batch: 25
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
+          # Mismos colores que las demás tarjetas (tema oscuro de GitHub)
           extras_css: |
             svg.large { background: #0d1117; border-radius: 4.5px; }
             .items-wrapper { padding: 6px 0 4px; }

@@ -11,6 +11,8 @@ import re
 from collections import Counter
 from html import escape
 
+from i18n import t
+
 # (nombre, color, función que decide si una ruta pertenece a la herramienta)
 TOOLS = [
     ("Docker", "#2496ED", lambda p, n: n.startswith(("dockerfile", "docker-compose", "compose.y")) or n == ".dockerignore"),
@@ -137,10 +139,10 @@ def chip_rows(items, width, x0=25, gap=10, char=7.2, pad=34):
     return placed, row + 1
 
 
-def render(tech, width=990):
+def render(tech, lang, width=990):
     tools = sorted(((n, len(f)) for n, f in tech.tools.items()), key=lambda kv: -kv[1])
     commands = tech.commands.most_common(30)
-    tool_items = [(f"{n} · {c} archivo{'s' if c != 1 else ''}", TOOL_COLORS.get(n, "#8b949e")) for n, c in tools]
+    tool_items = [(f"{n} · {c} {t(lang, 'tech.file' if c == 1 else 'tech.files')}", TOOL_COLORS.get(n, "#8b949e")) for n, c in tools]
     cmd_items = [(f"{c}  ×{n:,}", "#8b949e") for c, n in commands]
 
     tool_chips, tool_rows = chip_rows(tool_items, width)
@@ -165,7 +167,7 @@ def render(tech, width=990):
             f'<text x="{x + 12:.1f}" y="{y}" class="cmd">$ {escape(label)}</text>'
         )
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Tecnologías y comandos que uso">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{t(lang, 'tech.label')}">
   <style>
     .title {{ font: 600 18px 'Segoe UI', Ubuntu, sans-serif; fill: #58a6ff; }}
     .sub {{ font: 400 12px 'Segoe UI', Ubuntu, sans-serif; fill: #8b949e; }}
@@ -173,11 +175,11 @@ def render(tech, width=990):
     .cmd {{ font: 400 13px Consolas, 'SFMono-Regular', Menlo, monospace; fill: #7ee787; }}
   </style>
   <rect width="{width}" height="{height}" rx="4.5" fill="#0d1117"/>
-  <text x="25" y="36" class="title">Herramientas y plataformas</text>
-  <text x="25" y="58" class="sub">Detectadas en los archivos que modifiqué en mis commits</text>
+  <text x="25" y="36" class="title">{t(lang, 'tech.tools.title')}</text>
+  <text x="25" y="58" class="sub">{t(lang, 'tech.tools.sub')}</text>
   {"".join(p for p in parts[:len(tool_chips)])}
-  <text x="25" y="{y_cmd_title}" class="title">Comandos de terminal que más uso</text>
-  <text x="25" y="{y_cmd_title + 22}" class="sub">En scripts de shell, Dockerfiles, workflows de CI, servicios systemd y bloques de código de documentación</text>
+  <text x="25" y="{y_cmd_title}" class="title">{t(lang, 'tech.commands.title')}</text>
+  <text x="25" y="{y_cmd_title + 22}" class="sub">{t(lang, 'tech.commands.sub')}</text>
   {"".join(p for p in parts[len(tool_chips):])}
 </svg>
 '''

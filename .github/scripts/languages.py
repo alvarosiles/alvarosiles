@@ -2,7 +2,7 @@
 
 Recorre todos los repos accesibles con el token (propios, de colaborador y de
 organizaciones) y todas sus ramas, cuenta solo los commits de mis identidades
-y genera en OUTDIR:
+y genera en OUTDIR (cada tarjeta en español y en inglés, ver i18n.py):
   languages.svg  líneas añadidas por lenguaje
   tech.svg       herramientas y comandos de terminal (ver tech.py)
   commits.json   totales que usa stats.py
@@ -23,6 +23,7 @@ import tempfile
 import urllib.request
 from html import escape
 
+from i18n import LANGS, filename, t
 from tech import PATCH_PATHS, Tech
 from tech import render as render_tech
 
@@ -148,7 +149,7 @@ def analyze(token, repo, workdir, seen, stats, tech):
     return len(new)
 
 
-def render(stats, commits, repos, limit=10):
+def render(stats, commits, repos, lang, limit=10):
     total = sum(stats.values())
     top = sorted(((k, v) for k, v in stats.items() if v), key=lambda kv: -kv[1])[:limit]
     width, bar_w = 495, 445
@@ -170,7 +171,7 @@ def render(stats, commits, repos, limit=10):
             f'<text x="{cx + 205}" y="{cy}" class="pct" text-anchor="end">{100 * lines / total:.1f}%</text>'
         )
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Lenguajes de todos mis commits">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{t(lang, 'languages.title')}">
   <style>
     .title {{ font: 600 18px 'Segoe UI', Ubuntu, sans-serif; fill: #58a6ff; }}
     .sub {{ font: 400 12px 'Segoe UI', Ubuntu, sans-serif; fill: #8b949e; }}
@@ -178,8 +179,8 @@ def render(stats, commits, repos, limit=10):
     .pct {{ font: 600 13px 'Segoe UI', Ubuntu, sans-serif; fill: #8b949e; }}
   </style>
   <rect width="{width}" height="{height}" rx="4.5" fill="#0d1117"/>
-  <text x="25" y="36" class="title">Lenguajes en todos mis commits</text>
-  <text x="25" y="58" class="sub">{commits:,} commits · {repos} repos · {total:,} líneas añadidas</text>
+  <text x="25" y="36" class="title">{t(lang, 'languages.title')}</text>
+  <text x="25" y="58" class="sub">{t(lang, 'languages.sub', commits=commits, repos=repos, lines=total)}</text>
   <clipPath id="bar"><rect x="25" y="78" width="{bar_w}" height="8" rx="4"/></clipPath>
   <g clip-path="url(#bar)">{"".join(bar)}</g>
   {"".join(items)}
@@ -206,10 +207,11 @@ def main():
         sys.exit("No se encontraron commits; no se sobrescriben las tarjetas")
     outdir = os.environ.get("OUTDIR", "metrics")
     os.makedirs(outdir, exist_ok=True)
-    with open(os.path.join(outdir, "languages.svg"), "w", encoding="utf-8") as f:
-        f.write(render(stats, len(seen), active))
-    with open(os.path.join(outdir, "tech.svg"), "w", encoding="utf-8") as f:
-        f.write(render_tech(tech))
+    for lang in LANGS:
+        with open(os.path.join(outdir, filename("languages", lang)), "w", encoding="utf-8") as f:
+            f.write(render(stats, len(seen), active, lang))
+        with open(os.path.join(outdir, filename("tech", lang)), "w", encoding="utf-8") as f:
+            f.write(render_tech(tech, lang))
     with open(os.path.join(outdir, "commits.json"), "w", encoding="utf-8") as f:
         json.dump({"commits": len(seen), "repos": active, "lines": sum(stats.values())}, f)
 

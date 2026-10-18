@@ -17,7 +17,7 @@ import sys
 import urllib.request
 from html import escape
 
-MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+from i18n import fmt_date
 
 BLUE, GREEN, GREY, LABEL = "#1f6feb", "#2ea043", "#6e7681", "#30363d"
 
@@ -137,7 +137,8 @@ def main():
         ("pull requests", f"{prs:,} open", GREEN if prs == 0 else BLUE),
         ("issues", f"{issues:,} open", GREEN if issues == 0 else BLUE),
         ("contributors", f"{contributors:,}", BLUE),
-        ("last commit", f"{last.day} {MONTHS[last.month - 1]} {last.year}", BLUE),
+        # Las etiquetas de los badges están en inglés, así que la fecha también.
+        ("last commit", fmt_date(last, "en"), BLUE),
         ("downloads", f"{downloads:,}", BLUE if downloads else GREY),
         ("license", licenses.most_common(1)[0][0] if licenses else "none", BLUE if licenses else GREY),
     ]

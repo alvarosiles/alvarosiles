@@ -1,6 +1,6 @@
 <p>
-  <a href="https://alvarosiles.cloud"><img align="right" height="20" src="boton-portafolio.svg" alt="Portafolio web" /></a>
-  <a href="https://github.com/alvarosiles"><img height="20" src="boton-volver.svg" alt="Volver al perfil" /></a>
+  <a href="https://alvarosiles.cloud"><img align="right" height="20" src="assets/btn-portfolio-es.svg" alt="Portafolio web" /></a>
+  <a href="https://github.com/alvarosiles"><img height="20" src="assets/btn-back.svg" alt="Volver al perfil" /></a>
 </p>
 
 <h1 align="center">Métricas de GitHub</h1>

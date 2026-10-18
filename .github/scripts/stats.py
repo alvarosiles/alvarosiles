@@ -1,5 +1,7 @@
 """Genera metrics/stats.svg y metrics/streak.svg con datos de la API de GitHub.
 
+Cada tarjeta se genera en español y en inglés (ver i18n.py).
+
 Usa el token del usuario, así que incluye contribuciones privadas y de
 organizaciones. Si existe OUTDIR/commits.json (de languages.py) añade los
 commits y líneas de todas las ramas. Sin dependencias externas.
@@ -17,7 +19,7 @@ import sys
 import urllib.request
 from html import escape
 
-MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+from i18n import LANGS, filename, fmt_date, t
 
 STYLE = """
     .title { font: 600 18px 'Segoe UI', Ubuntu, sans-serif; fill: #58a6ff; }
@@ -70,10 +72,6 @@ query($login: String!, $from: DateTime!, $to: DateTime!) {
   }
 }
 """
-
-
-def fmt_date(d):
-    return f"{d.day} {MONTHS[d.month - 1]} {d.year}"
 
 
 def collect(token, login):
@@ -147,16 +145,16 @@ def streaks(days, today):
     return runs(days, today, 1), runs(weeks, week_of(today), 7)
 
 
-def render_stats(s, width=495, height=250):
+def render_stats(s, lang, width=495, height=250):
     rows = [
-        ("Contribuciones totales", s["contributions"]),
-        ("Commits (gráfico de GitHub)", s["commits"]),
-        ("Commits en todas las ramas", s.get("all_commits", 0)),
-        ("Líneas añadidas", s.get("lines", 0)),
-        ("Pull requests", s["prs"]),
-        ("Issues", s["issues"]),
-        ("Repos en los que contribuí", s["contributed"]),
-        ("Organizaciones", s["orgs"]),
+        (t(lang, "stats.contributions"), s["contributions"]),
+        (t(lang, "stats.commits"), s["commits"]),
+        (t(lang, "stats.all_commits"), s.get("all_commits", 0)),
+        (t(lang, "stats.lines"), s.get("lines", 0)),
+        (t(lang, "stats.prs"), s["prs"]),
+        (t(lang, "stats.issues"), s["issues"]),
+        (t(lang, "stats.contributed"), s["contributed"]),
+        (t(lang, "stats.orgs"), s["orgs"]),
     ]
     items = []
     for i, (label, value) in enumerate(rows):
@@ -165,27 +163,27 @@ def render_stats(s, width=495, height=250):
             f'<text x="{x}" y="{y}" class="label">{escape(label)}</text>'
             f'<text x="{x + 205}" y="{y}" class="value" text-anchor="end">{value:,}</text>'
         )
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Estadísticas de GitHub">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{t(lang, 'stats.title')}">
   <style>{STYLE}</style>
   <rect width="{width}" height="{height}" rx="4.5" fill="#0d1117"/>
-  <text x="25" y="36" class="title">Estadísticas de GitHub</text>
-  <text x="25" y="58" class="sub">Incluye contribuciones privadas y de organizaciones · desde {fmt_date(s["since"])}</text>
+  <text x="25" y="36" class="title">{t(lang, 'stats.title')}</text>
+  <text x="25" y="58" class="sub">{t(lang, 'stats.sub', since=fmt_date(s['since'], lang))}</text>
   {"".join(items)}
 </svg>
 '''
 
 
-def render_streak(s, daily, weekly, width=990, height=200):
+def render_streak(s, daily, weekly, lang, width=990, height=200):
     def period(best):
         a, b = best
-        return f"{fmt_date(a)} – {fmt_date(b)}" if a else "—"
+        return f"{fmt_date(a, lang)} – {fmt_date(b, lang)}" if a else "—"
 
     cols = [
-        (s["contributions"], "Contribuciones totales", f"desde {fmt_date(s['since'])}", False),
-        (daily[0], "Racha actual (días)", "días seguidos con actividad", True),
-        (daily[1], "Racha más larga (días)", period(daily[2]), False),
-        (weekly[0], "Racha actual (semanas)", "semanas seguidas con actividad", True),
-        (weekly[1], "Racha más larga (semanas)", period(weekly[2]), False),
+        (s["contributions"], t(lang, "streak.total"), t(lang, "streak.since", since=fmt_date(s["since"], lang)), False),
+        (daily[0], t(lang, "streak.current_days"), t(lang, "streak.current_days.sub"), True),
+        (daily[1], t(lang, "streak.longest_days"), period(daily[2]), False),
+        (weekly[0], t(lang, "streak.current_weeks"), t(lang, "streak.current_weeks.sub"), True),
+        (weekly[1], t(lang, "streak.longest_weeks"), period(weekly[2]), False),
     ]
     col_w = width / len(cols)
     parts = []
@@ -198,7 +196,7 @@ def render_streak(s, daily, weekly, width=990, height=200):
             f'<text x="{cx:.1f}" y="128" class="caption" text-anchor="middle">{escape(caption)}</text>'
             f'<text x="{cx:.1f}" y="150" class="date" text-anchor="middle">{escape(date)}</text>'
         )
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Constancia y rachas">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{t(lang, 'streak.label')}">
   <style>{STYLE}</style>
   <rect width="{width}" height="{height}" rx="4.5" fill="#0d1117"/>
   {"".join(parts)}
@@ -222,10 +220,11 @@ def main():
         pass
     daily, weekly = streaks(s["days"], dt.date.today())
     os.makedirs(outdir, exist_ok=True)
-    with open(os.path.join(outdir, "stats.svg"), "w", encoding="utf-8") as f:
-        f.write(render_stats(s))
-    with open(os.path.join(outdir, "streak.svg"), "w", encoding="utf-8") as f:
-        f.write(render_streak(s, daily, weekly))
+    for lang in LANGS:
+        with open(os.path.join(outdir, filename("stats", lang)), "w", encoding="utf-8") as f:
+            f.write(render_stats(s, lang))
+        with open(os.path.join(outdir, filename("streak", lang)), "w", encoding="utf-8") as f:
+            f.write(render_streak(s, daily, weekly, lang))
     print(f"Contribuciones {s['contributions']:,} · commits {s['commits']:,} · PRs {s['prs']} · issues {s['issues']}")
     print(f"Racha diaria actual {daily[0]}, máxima {daily[1]} {daily[2]}")
     print(f"Racha semanal actual {weekly[0]}, máxima {weekly[1]} {weekly[2]}")

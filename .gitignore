@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 metrics/commits.json
+
+# Configuración local de Claude Code
+.claude/
