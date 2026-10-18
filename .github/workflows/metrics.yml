@@ -39,6 +39,7 @@ jobs:
           user: alvarosiles
           base: header, activity, community, repositories, metadata
           config_timezone: America/La_Paz
+          config_display: large
           repositories_affiliations: owner, collaborator, organization_member
           repositories_forks: no
           repositories_batch: 25

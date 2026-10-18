@@ -5,7 +5,7 @@
 
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&color=0e75b6&style=flat" />
+  <img src="https://komarev.com/ghpvc/?username=alvarosiles&label=PROFILE+VIEWS&color=1f6feb&style=flat" />
 </p>
 
 <p align="center">
@@ -21,8 +21,6 @@
   <img width="99%" src="metrics/streak.svg" />
 </p>
 
-<h2 align="center">🗓️ Actividad</h2>
-
 <p align="center">
-  <img src="metrics/general.svg" />
+  <img width="99%" src="metrics/general.svg" />
 </p>
