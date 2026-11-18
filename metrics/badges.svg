@@ -19,14 +19,14 @@
     <rect x="69.0" width="19.0" height="20" rx="3" fill="#1f6feb"/>
     <rect x="69.0" width="4" height="20" fill="#1f6feb"/>
     <text x="34.5" y="14" text-anchor="middle">following</text>
-    <text x="78.5" y="14" text-anchor="middle">5</text>
+    <text x="78.5" y="14" text-anchor="middle">6</text>
   </g>
   <g transform="translate(335.2,0)">
     <rect width="73.0" height="20" rx="3" fill="#30363d"/>
     <rect x="47.0" width="26.0" height="20" rx="3" fill="#1f6feb"/>
     <rect x="47.0" width="4" height="20" fill="#1f6feb"/>
     <text x="23.5" y="14" text-anchor="middle">repos</text>
-    <text x="60.0" y="14" text-anchor="middle">68</text>
+    <text x="60.0" y="14" text-anchor="middle">69</text>
   </g>
   <g transform="translate(414.2,0)">
     <rect width="66.0" height="20" rx="3" fill="#30363d"/>
@@ -75,7 +75,7 @@
     <rect x="84.5" width="84.0" height="20" rx="3" fill="#1f6feb"/>
     <rect x="84.5" width="4" height="20" fill="#1f6feb"/>
     <text x="42.2" y="14" text-anchor="middle">last commit</text>
-    <text x="126.5" y="14" text-anchor="middle">17 Nov 2026</text>
+    <text x="126.5" y="14" text-anchor="middle">18 Nov 2026</text>
   </g>
   <g transform="translate(522.8,28)">
     <rect width="100.0" height="20" rx="3" fill="#30363d"/>
